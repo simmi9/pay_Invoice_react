@@ -9,13 +9,9 @@ export class Invoice extends React.Component {
 
 	state = {
 		loading:false,
-		amount:500,
-		amountEditable:false,
-		name:'',
-		card:'',
-		expiryDate:'',
-		securityCode:'',
-		zip:'',
+		fields:{ amount:500, name:'', card:'', expiryDate:'', securityCode:'', zip:''}, 
+		amountEditable:false, 
+		errors:{}    
 	};
 
 
@@ -23,17 +19,11 @@ export class Invoice extends React.Component {
 		setTimeout(function() {}, 50);
 	}
 
-	handleChangeAmount = (event) => {
-    this.setState({amount: event.target.value});
-    }
-
-    handleChangeName = (event) => {
-    this.setState({name: event.target.value});
-    }
-
-    handleChangeCardNumber = (event) => {
-    this.setState({card: event.target.value});
-    }
+	handleChange = (field,event) => {    
+		let fields = this.state.fields;
+        fields[field] = event.target.value;        
+        this.setState({fields});    
+	}
 
   	editAmount = (event) => {
   		this.setState(prevState => ({
@@ -61,19 +51,17 @@ export class Invoice extends React.Component {
 				<div className="pay_invoice_header">
 					<span> Pay Invoice </span>
 				</div>
-				<InvoiceForm amount={this.state.amount} 
+				<InvoiceForm amount={this.state.fields['amount']} 
 							 amountEditable={this.state.amountEditable}
-							 name={this.state.name}
-							 card= {this.state.card}
-							 expiryDate={this.state.expiryDate}
-							 securityCode={this.state.securityCode}
-							 zip={this.state.zip}
+							 name={this.state.fields['name']}
+							 card= {this.state.fields['card']}
+							 expiryDate={this.state.fields['expiryDate']}
+							 securityCode={this.state.fields['securityCode']}
+							 zip={this.state.fields['zip']}
 							 editAmount={this.editAmount}
 							 payInvoice={this.payInvoice}
-							 handleChangeAmount={this.handleChangeAmount}
-							 handleChangeName={this.handleChangeName}
-							 handleChangeCardNumber={this.handleChangeCardNumber}>
-				</InvoiceForm>
+							 handleChange={this.handleChange}>
+				</InvoiceForm>  
 			</section>
 			)
 	}
