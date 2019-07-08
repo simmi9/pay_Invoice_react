@@ -4,19 +4,100 @@ import './index.css';
 import App from './App';
 import {InvoiceForm} from './InvoiceForm';
 import * as serviceWorker from './serviceWorker';
+import $ from 'jquery';  
 
 export class Invoice extends React.Component {
 
 	state = {
 		loading:false,
-		fields:{ amount:500, name:'', card:'', expiryDate:'', securityCode:'', zip:''}, 
+		fields:{ amount:500, 
+				 name:'', 
+				 card:'', 
+				 expiryDate:'', 
+				 securityCode:'', 
+				 zip:''}, 
 		amountEditable:false, 
 		errors:{}    
 	};
 
+	handleValidation = () =>{
+        let fields = this.state.fields;
+        let errors = {};
+        let formIsValid = true;
 
-	payInvoice = () => {
-		setTimeout(function() {}, 50);
+        //Name
+        if(!fields["name"]){
+           formIsValid = false;
+           errors["name"] = "Cannot be empty";
+        }
+
+        if(typeof fields["name"] !== "undefined"){
+           if(!fields["name"].match(/^[a-zA-Z]+$/)){
+              formIsValid = false;
+              errors["name"] = "Only letters";
+           }   
+        }
+
+        if(!fields["card"]){
+           formIsValid = false;
+           errors["card"] = "Cannot be empty";
+        }
+
+         if(typeof fields["card"] !== "undefined"){
+           if(!fields["card"].match(/^[0-9]+$/)){
+              formIsValid = false;
+              errors["card"] = "Only Numbers";  
+           }         
+        }
+
+
+       this.setState({errors: errors});
+       return formIsValid;   
+	}
+
+
+    invalidMessage = (field, textbox) => {
+	textbox.preventDefault(); 
+
+   	let fields = this.state.fields;
+   	let errors = {};  
+
+   	 if(typeof fields["name"] !== "undefined"){
+        if(!fields["name"].match(/^[a-zA-Z]+$/)){
+              errors["name"] = "Only letters";
+           }  
+        } 
+ 
+    this.setState({errors: errors});
+
+   	if(field === 'name'){     
+   		if(this.state.errors['name']){  
+   		 textbox.target.setCustomValidity(this.state.errors['name']);          
+   		} else {
+   		textbox.target.setCustomValidity(''); 	
+   		}
+    } 
+
+    if(field === 'card'){      
+    	  if(this.state.errors['card']) {
+   		 textbox.target.setCustomValidity(this.state.errors['card']);     
+   		 } else {
+   		 	textbox.target.setCustomValidity(''); 
+   		 }    
+    }  
+
+   }     
+
+
+	payInvoice = (event) => {
+  
+		 event.preventDefault();
+
+        if(this.handleValidation()){  
+           alert("Form submitted");
+        } else {
+           //alert("Form has errors.")
+        }
 	}
 
 	handleChange = (field,event) => {    
@@ -60,7 +141,9 @@ export class Invoice extends React.Component {
 							 zip={this.state.fields['zip']}
 							 editAmount={this.editAmount}
 							 payInvoice={this.payInvoice}
-							 handleChange={this.handleChange}>
+							 handleChange={this.handleChange}
+							 errors={this.state.errors}
+							 invalidMessage= {this.invalidMessage}>
 				</InvoiceForm>  
 			</section>
 			)
