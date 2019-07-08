@@ -93,7 +93,8 @@ body {
     border-width: thin;
     border-color: #aeb2b2;
     height:1.6em; 
-    width: 90%;      
+    width: 90%;  
+    padding-left: 1em    
 }
 
  .editable-field-amount input:focus {  
@@ -112,16 +113,18 @@ body {
 }  
 
 .holder-name-input {
-	font-size: 1.1em;
+	  font-size: 1.1em;
     border-radius: 0.3em;
     border-style: solid;
     border-width: thin;
     border-color: #aeb2b2;
     height:1.6em;
+    padding-left: 1em
 }
 
 .holder-name-input:focus{
-   border-color: #73c7c7 !important;  
+   border-color: #73c7c7 !important; 
+   border-radius: 0.3em;   
    background-color: #e4f3f3;
    }
 
@@ -140,14 +143,105 @@ body {
     border-width: thin;
     border-color: #aeb2b2;
     height:1.6em;
-
+    padding-left: 1em
 }
 
 .holder-card-input:focus {  
    border-color: #73c7c7 !important;  
+   border-radius: 0.3em;
    background-color: #e4f3f3;
    }  
 
+
+
+.expiry_security_container {  
+    display:flex;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    font-weight: bold;
+    justify-content: space-between;
+    margin-top:1.5em;
+}   
+
+.holder-card-expiry-label {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.holder-card-expiry-input{
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    border-top-right-radius: 0em;
+    border-bottom-right-radius: 0em;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aeb2b2;
+    height:1.6em;
+    padding-left: 1em
+}
+
+.holder-card-expiry-input:focus {  
+   border-color: #73c7c7 !important;    
+   border-top-left-radius: 0.3em;
+   border-bottom-left-radius: 0.3em;
+   background-color: #e4f3f3;
+   } 
+
+.holder-card-expiry-input::placeholder{
+  color: lightgray;
+}
+
+.holder-card-security-label {   
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.holder-card-security-input {
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aeb2b2;
+    height:1.6em;
+    padding-left: 1em
+}
+
+.holder-card-security-input:focus {  
+   border-color: #73c7c7 !important;  
+   border-top-right-radius: 0.3em;
+   border-bottom-right-radius: 0.3em;
+   background-color: #e4f3f3;
+   }  
+
+.holder-zip-label {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5em; 
+  margin-right: 1.5em; 
+  margin-top: 1.5em;
+  font-weight: bold; 
+}
+
+.holder-card-zip-input {
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aeb2b2;
+    height:1.6em;
+    padding-left: 1em
+}
+
+.holder-card-zip-input:focus {  
+   border-color: #73c7c7 !important;  
+   border-radius: 0.3em;
+   background-color: #e4f3f3;
+   }  
+  
 .submit-form-button-container {
   display: flex;
   margin-top:2em;
@@ -170,6 +264,7 @@ justify-content: center;
 font-size: 1.1em;
 }
    
+
 
 
 code {

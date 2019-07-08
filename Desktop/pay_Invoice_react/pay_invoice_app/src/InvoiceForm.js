@@ -33,10 +33,40 @@ export const InvoiceForm =({ amount, amountEditable, name, card, expiryDate, sec
 					 	className="holder-card-input" required/>        
 					</label>  
 
+					<div className="expiry_security_container">
+						<label className="holder-card-expiry-label">  Expiry date 
+						 	<input  type="text"   
+						 			value={expiryDate} 
+						 			placeholder="MM/YY"
+						 			onChange={handleChange.bind(this,'expiryDate')} 
+						 			onInput={invalidMessage.bind(this,'expiryDate')}  
+						 			className="holder-card-expiry-input" required/>        
+						</label> 
+
+						<label className="holder-card-security-label"> Security code   
+						 	<input type="text" 
+						 		   value={securityCode} 
+						 		   minlength="3" 
+						 		   onChange={handleChange.bind(this,'securityCode')} 
+						 	       onInput={invalidMessage.bind(this,'securityCode')}  
+						 	       className="holder-card-security-input" 
+						 	       required/>        
+						</label> 
+					</div>
+
+					<label className="holder-zip-label"> Security code   
+						<input type="text" 
+							   value={zip} 
+							   minlength="6" 
+							   onChange={handleChange.bind(this,'zip')} 
+							   onInput={invalidMessage.bind(this,'zip')}  
+							   className="holder-card-zip-input" 
+							   required/>        
+					</label> 
+
 					<div className="submit-form-button-container">    
 					 <button type="submit" className="submit-form-button"> Pay {amount}.00 </button>
 					</div> 
- 
 				</form>   
 			</div>  
 			)
