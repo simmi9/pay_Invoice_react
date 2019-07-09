@@ -7,38 +7,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.pay_invoice_container{
- display:flex;
+.pay_invoice_container {
+ display: flex;
  flex-direction: column;
  justify-content: center;
  align-self: center;
- border: 0.1em solid #80808070;
+ border: 0.1em solid #8080804f;
  border-radius: 2em;
  margin: 2em;
  color: #262525ab;
 }
 
 .pay_invoice_header {
-	display:flex;
-	flex-direction:row;
-	justify-content:center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 	background-color: #e4f3f3;  
 	border-top-left-radius: 0.9em;
 	border-top-right-radius: 0.9em;
 	font-size: 2em;
-	margin:0.2em;
 }
 
 .pay_invoice_header span {
 	margin-top: 0.5em;
-   	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
  }
 
  .invoice-form {
  	display: flex;
  	flex-direction: column;
- 	justify-content:center;
- 	margin:0.4em;
+ 	justify-content: center;
+ 	margin: 0.4em;
  	border: 0.1em solid white;
  	border-bottom-left-radius: 1.0em;
  	border-bottom-right-radius: 1.0em;
@@ -46,14 +45,15 @@ body {
 
 .amount-container {     
 	display: flex;
-    flex-direction: column;
+  flex-direction: column;
 }
 
-.amount-container-level1{
-	display:flex;
+.amount-container-level1 {
+	display: flex;
 	flex-direction: row;
-	margin-top:0.5em;
+	margin-top: 0.5em;
 	margin-bottom: 0.5em;
+  margin-right: 1.5em; 
 	align-items: center;
 }
 
@@ -75,7 +75,14 @@ body {
 
 .amount-edit-button {
     display: flex;
-    justify-content: flex-end;  
+    justify-content: center;
+    width: 4em;
+    height: 2.5em; 
+    background-color: white;  
+    border-style: solid;  
+    border-radius: 0.3em;
+    border-width: thin;
+    border-color: #aeb2b299;
 }
   
 .editable-field-amount input {    
@@ -83,13 +90,16 @@ body {
     border-radius: 0.3em;
     border-style: solid;
     border-width: thin;
-    border-color: #aeb2b2;
+    border-color: #aeb2b299;
+    height: 1.6em; 
+    width: 90%;  
+    padding-left: 1em    
 }
 
- .editable-field-amount input:focus {  
-    	border-color: #73c7c7 !important;  
-    	background-color: #e4f3f3;  
-    }
+.editable-field-amount input:focus {  
+    border-color: #73c7c7 !important;  
+    background-color: #e4f3f3;  
+}
 
 
 .holder-name-label {
@@ -97,42 +107,181 @@ body {
     flex-direction: column;
     margin-left: 1.5em;
     margin-bottom: 1.5em;
+    margin-right: 1.5em; 
     font-weight: bold;
 }  
 
 .holder-name-input {
-	font-size: 1.1em;
+	  font-size: 1.1em;
     border-radius: 0.3em;
     border-style: solid;
     border-width: thin;
-    border-color: #aeb2b2;
+    border-color: #aeb2b299;
+    height: 1.6em;
+    padding-left: 1em;
+    font-family: 'FontAwesome';
 }
 
-.holder-name-input:focus{
-   border-color: #73c7c7 !important;  
+.holder-name-input:focus {
+   border-color: #73c7c7 !important; 
+   border-radius: 0.3em;   
    background-color: #e4f3f3;
    }
 
 .holder-card-label {
-    display: flex;
-    flex-direction: column;
-    margin-left: 1.5em; 
-    font-weight: bold; 
+   display: flex;
+   flex-direction: column;
+   margin-left: 1.5em; 
+   margin-right: 1.5em; 
+   font-weight: bold; 
 }
 
 .holder-card-input {
-	font-size: 1.1em;
+	 font-size: 1.1em;
+   border-radius: 0.3em;
+   border-style: solid;
+   border-width: thin;
+   border-color: #aeb2b299;
+   height: 1.6em;
+   padding-left: 1em
+}
+
+.holder-card-input:focus {  
+   border-color: #73c7c7 !important;  
+   border-radius: 0.3em;
+   background-color: #e4f3f3;
+   }  
+
+
+
+.expiry_security_container {  
+    display:flex;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    font-weight: bold;
+    justify-content: space-between;
+    margin-top:1.5em;
+}   
+
+.holder-card-expiry-label {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.holder-card-expiry-input {
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    border-top-right-radius: 0em;
+    border-bottom-right-radius: 0em;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aeb2b299;
+    height: 1.6em;
+    padding-left: 1em
+}
+
+.holder-card-expiry-input:focus {  
+   border-color: #73c7c7 !important;    
+   border-top-left-radius: 0.3em;
+   border-bottom-left-radius: 0.3em;
+   background-color: #e4f3f3;
+   } 
+
+.holder-card-expiry-input::placeholder{
+  color: lightgray;
+}
+
+.holder-card-security-label {   
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.holder-card-security-input {
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aeb2b299;
+    height: 1.6em;
+    padding-left: 1em;
+}
+
+.holder-card-security-input::placeholder {
+  font-family: FontAwesome;  
+  text-align: right;
+  padding : 1em;
+  color: lightgray;
+}
+
+.holder-card-security-input:focus {  
+   border-color: #73c7c7 !important;  
+   border-top-right-radius: 0.3em;
+   border-bottom-right-radius: 0.3em;
+   background-color: #e4f3f3;
+}  
+
+.holder-zip-label {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5em; 
+  margin-right: 1.5em; 
+  margin-top: 1.5em;
+  font-weight: bold; 
+}
+
+.holder-card-zip-input {
+    font-size: 1.1em;
     border-radius: 0.3em;
     border-style: solid;
     border-width: thin;
-    border-color: #aeb2b2;
+    border-color: #aeb2b299;
+    height: 1.6em;
+    padding-left: 1em
+}  
 
+.holder-card-zip-input::placeholder {
+  font-family: FontAwesome;    
+  text-align: right;
+  padding : 1em;  
+  color: lightgray;
 }
 
-.holder-card-input:focus{  
+.holder-card-zip-input:focus {  
    border-color: #73c7c7 !important;  
+   border-radius: 0.3em;
    background-color: #e4f3f3;
-   }
+   }  
+  
+.submit-form-button-container {
+  display: flex;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;  
+}
+
+.submit-form-button {      
+ display: flex;  
+ width: 100%;
+ height: 2em;
+ background-color: #61dafb;
+ color:white;
+ border-radius:0.3em;
+ border-style: none;
+ border-width: none;
+ align-items:center;
+ justify-content: center;
+ font-size: 1.1em;
+}
+   
+.show-lock {
+padding-right: 1em; 
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
