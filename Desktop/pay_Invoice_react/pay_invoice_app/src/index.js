@@ -4,20 +4,20 @@ import './index.css';
 import App from './App';
 import {InvoiceForm} from './InvoiceForm';
 import * as serviceWorker from './serviceWorker';
-import $ from 'jquery';  
 
 export class Invoice extends React.Component {
 
 	state = {
 		loading:false,
-		fields:{ amount:500, 
+		fields:{ amount:500,   
 				 name:'', 
 				 card:'', 
 				 expiryDate:'', 
 				 securityCode:'', 
 				 zip:''}, 
 		amountEditable:false, 
-		errors:{}    
+		errors:{} ,
+    formValid: false,   
 	};
 
 	handleValidation = () =>{
@@ -31,9 +31,9 @@ export class Invoice extends React.Component {
         }
 
         if(typeof fields["name"] !== "undefined"){
-           if(!fields["name"].match(/^[a-zA-Z]+$/)){
+           if(!fields["name"].match(/^[a-zA-Z]+?(\s)[a-zA-Z]+$/)){
               formIsValid = false;
-              errors["name"] = "Only letters";
+              errors["name"] = "FirstName LastName";
            }    
         }
 
@@ -42,7 +42,22 @@ export class Invoice extends React.Component {
            errors["card"] = "Cannot be empty";
         }
 
-         if(typeof fields["card"] !== "undefined"){
+        if(!fields["expiryDate"]){
+           formIsValid = false;
+           errors["expiryDate"] = "Cannot be empty";
+        }
+
+        if(!fields["securityCode"]){
+           formIsValid = false;
+           errors["securityCode"] = "Cannot be empty";
+        }
+
+        if(!fields["zip"]){
+           formIsValid = false;
+           errors["zip"] = "Cannot be empty";
+        }  
+
+        if(typeof fields["card"] !== "undefined"){
            if(!fields["card"].match(/^[0-9]+$/)){
               formIsValid = false;
               errors["card"] = "Only Numbers";  
@@ -57,7 +72,7 @@ export class Invoice extends React.Component {
 	        let validMonth;
 	        let validYear;
 	          validMonths.forEach(month => {
-	          	if(month !== 10||11||12){
+	          	if(month !== 10||11||12) {
 	          		const appendedMonth=`0${month}`;
 	          	if(expiryDate[0] === appendedMonth){
 	          		validMonth = true;  
@@ -77,8 +92,7 @@ export class Invoice extends React.Component {
 	         if(!validMonth || !validYear){
 	         	 errors["expiryDate"] = "Invalid expiry date"; 
 	         }
-	    }
-
+	    }        
        this.setState({errors: errors});   
        return formIsValid;   
 	}
@@ -91,8 +105,8 @@ export class Invoice extends React.Component {
    	let errors = {};  
 
    	 if(typeof fields["name"] !== "undefined"){
-           if(!fields["name"].match(/^[a-zA-Z]+$/)){
-              errors["name"] = "Only letters";
+           if(!fields["name"].match(/^[a-zA-Z]+?(\s)[a-zA-Z]+$/)){
+              errors["name"] = "FirstName LastName";
            }  
         }
 
@@ -164,14 +178,15 @@ export class Invoice extends React.Component {
   
 		 event.preventDefault();
 
-        if(this.handleValidation()){  
-           alert("Form submitted");
-        } else {
-           //alert("Form has errors.")
-        }
+        if(this.handleValidation()){ 
+           this.setState({formValid:true});  
+           setTimeout(function(){ alert("Form submitted")},50);  
+           return;  
+        }   
 	}
 
-	handleChange = (field,event) => {    
+	handleChange = (field,event) => {   
+   this.setState({formValid:false}); 
 		let fields = this.state.fields;
         fields[field] = event.target.value;        
         this.setState({fields});    
@@ -184,7 +199,7 @@ export class Invoice extends React.Component {
 		event.preventDefault();  
     }  
 
-	//using Component Life Cycle Methods
+
 	async componentDidMount() {
 		this.setState({loading:true});
 		//let req = await fetch('');
@@ -197,7 +212,7 @@ export class Invoice extends React.Component {
 			console.log("The component just updated")
 		}
 
-	render() {
+	render() {  
 		return (
 			<section className="pay_invoice_container">
 				<div className="pay_invoice_header">
@@ -214,7 +229,8 @@ export class Invoice extends React.Component {
 							 payInvoice={this.payInvoice}
 							 handleChange={this.handleChange}
 							 errors={this.state.errors}
-							 invalidMessage= {this.invalidMessage}>
+							 invalidMessage= {this.invalidMessage}
+               formValid={this.state.formValid}>  
 				</InvoiceForm>  
 			</section>
 			)
