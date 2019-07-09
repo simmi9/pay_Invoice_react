@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM, { render } from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
+import { faQuestion } from '@fortawesome/fontawesome-free-solid';
 import $ from 'jquery';  
 
 export const InvoiceForm =({ amount, amountEditable, name, card, expiryDate, securityCode, zip, payInvoice, editAmount, handleChange,errors,invalidMessage}) => {
@@ -35,12 +37,14 @@ export const InvoiceForm =({ amount, amountEditable, name, card, expiryDate, sec
 
 					<div className="expiry_security_container">
 						<label className="holder-card-expiry-label">  Expiry date 
-						 	<input  type="text"   
+						 	<input  type="textT"   
 						 			value={expiryDate} 
-						 			placeholder="MM/YY"
+						 			placeholder='MM/YY'
+						 			pattern="(?:0[1-9]|1[0-2])/[0-9]{2}"  
 						 			onChange={handleChange.bind(this,'expiryDate')} 
 						 			onInput={invalidMessage.bind(this,'expiryDate')}  
-						 			className="holder-card-expiry-input" required/>        
+						 			className="holder-card-expiry-input" 
+						 			required/>        
 						</label> 
 
 						<label className="holder-card-security-label"> Security code   

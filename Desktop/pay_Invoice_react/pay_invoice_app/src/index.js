@@ -25,7 +25,6 @@ export class Invoice extends React.Component {
         let errors = {};
         let formIsValid = true;
 
-        //Name
         if(!fields["name"]){
            formIsValid = false;
            errors["name"] = "Cannot be empty";
@@ -35,7 +34,7 @@ export class Invoice extends React.Component {
            if(!fields["name"].match(/^[a-zA-Z]+$/)){
               formIsValid = false;
               errors["name"] = "Only letters";
-           }   
+           }    
         }
 
         if(!fields["card"]){
@@ -48,27 +47,91 @@ export class Invoice extends React.Component {
               formIsValid = false;
               errors["card"] = "Only Numbers";  
            }         
-        }
+        } 
 
 
-       this.setState({errors: errors});
+        if(typeof fields["expiryDate"] !== "undefined"){              
+	     	const validMonths = [1,2,3,4,5,6,7,8,9,10,11,12];  
+	     	const maxYear = 26;
+	        let expiryDate = fields['expiryDate'].split('/');
+	        let validMonth;
+	        let validYear;
+	          validMonths.forEach(month => {
+	          	if(month !== 10||11||12){
+	          		const appendedMonth=`0${month}`;
+	          	if(expiryDate[0] === appendedMonth){
+	          		validMonth = true;  
+	          	}}
+	          	else{
+	          		if(expiryDate[0] === month){  
+	          		validMonth = true;  
+	          	}
+	          	}
+	          });
+
+	         let year = Number(expiryDate[1]);
+	         if(year <= maxYear){
+	         	validYear = true;  
+	         }
+
+	         if(!validMonth || !validYear){
+	         	 errors["expiryDate"] = "Invalid expiry date"; 
+	         }
+	    }
+
+       this.setState({errors: errors});   
        return formIsValid;   
 	}
 
 
-    invalidMessage = (field, textbox) => {
-	textbox.preventDefault(); 
+   invalidMessage = (field, textbox) => {
+    textbox.preventDefault();  
 
    	let fields = this.state.fields;
    	let errors = {};  
 
    	 if(typeof fields["name"] !== "undefined"){
-        if(!fields["name"].match(/^[a-zA-Z]+$/)){
+           if(!fields["name"].match(/^[a-zA-Z]+$/)){
               errors["name"] = "Only letters";
            }  
-        } 
- 
-    this.setState({errors: errors});
+        }
+
+     if(typeof fields["card"] !== "undefined"){
+           if(!fields["card"].match(/^[0-9]+$/)){
+              errors["card"] = "Only Numbers";  
+           }      
+        }
+    
+     if(typeof fields["expiryDate"] !== "undefined"){              
+     	const validMonths = [1,2,3,4,5,6,7,8,9,10,11,12];  
+     	const maxYear = 26;
+        let expiryDate = fields['expiryDate'].split('/');
+        let validMonth;
+        let validYear;
+          validMonths.forEach(month => {
+          	if(month !== 10||11||12){
+          		const appendedMonth=`0${month}`;
+          	if(expiryDate[0] === appendedMonth){
+          		validMonth = true;  
+          	}}
+          	else{
+          		if(expiryDate[0] === month){  
+          		validMonth = true;  
+          	}
+          	}
+          });
+
+         let year = Number(expiryDate[1]);
+         if(year <= maxYear){
+         	validYear = true;  
+         }
+
+         if(!validMonth || !validYear){
+         	 errors["expiryDate"] = "Invalid expiry date"; 
+         }
+    }
+   
+    this.setState({errors: errors});   
 
    	if(field === 'name'){     
    		if(this.state.errors['name']){  
@@ -80,11 +143,19 @@ export class Invoice extends React.Component {
 
     if(field === 'card'){      
     	  if(this.state.errors['card']) {
-   		 textbox.target.setCustomValidity(this.state.errors['card']);     
+   		 	textbox.target.setCustomValidity(this.state.errors['card']);     
    		 } else {
    		 	textbox.target.setCustomValidity(''); 
    		 }    
     }  
+
+    if(field === 'expiryDate'){      
+    	 if(this.state.errors['expiryDate']) {
+   		 	textbox.target.setCustomValidity(this.state.errors['expiryDate']);     
+   		 } else {  
+   		 	textbox.target.setCustomValidity(''); 
+   		 }    
+    } 
 
    }     
 
